@@ -1,0 +1,61 @@
+@import "tailwindcss";
+
+:root {
+  --background: #f7f0df;
+  --foreground: #172a24;
+  --color-gold: #e4c278;
+  --color-forest: #123d33;
+  --color-olive: #47624f;
+  --color-sand: #f6e7c4;
+}
+
+@theme inline {
+  --color-background: var(--background);
+  --color-foreground: var(--foreground);
+  --font-sans: "Tajawal", "Segoe UI", sans-serif;
+  --font-display: "Tajawal", "Segoe UI", sans-serif;
+}
+
+* {
+  box-sizing: border-box;
+}
+
+html {
+  scroll-behavior: smooth;
+}
+
+body {
+  background: var(--background);
+  color: var(--foreground);
+  font-family: "Tajawal", "Segoe UI", sans-serif;
+  background-image:
+    linear-gradient(rgba(255, 255, 255, 0.26), rgba(255, 255, 255, 0.26)),
+    radial-gradient(circle at top right, rgba(228, 194, 120, 0.16), transparent 24%),
+    radial-gradient(circle at left center, rgba(18, 61, 51, 0.12), transparent 30%);
+}
+
+::selection {
+  background: rgba(185, 150, 82, 0.25);
+  color: var(--color-forest);
+}
+
+@keyframes float {
+  0%,
+  100% {
+    transform: translateY(0px);
+  }
+  50% {
+    transform: translateY(-12px);
+  }
+}
+
+@keyframes fade-up {
+  0% {
+    opacity: 0;
+    transform: translateY(18px);
+  }
+  100% {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}
