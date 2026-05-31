@@ -26,8 +26,12 @@ export function LocaleProvider({ children }: PropsWithChildren) {
       return "ar";
     }
 
-    const stored = window.localStorage.getItem(STORAGE_KEY) as Locale | null;
-    return stored === "ar" || stored === "en" ? stored : "ar";
+    try {
+      const stored = window.localStorage.getItem(STORAGE_KEY) as Locale | null;
+      return stored === "ar" || stored === "en" ? stored : "ar";
+    } catch {
+      return "ar";
+    }
   });
 
   useEffect(() => {
@@ -35,7 +39,12 @@ export function LocaleProvider({ children }: PropsWithChildren) {
     document.documentElement.lang = locale;
     document.documentElement.dir = direction;
     document.body.dir = direction;
-    window.localStorage.setItem(STORAGE_KEY, locale);
+
+    try {
+      window.localStorage.setItem(STORAGE_KEY, locale);
+    } catch {
+      // Ignore storage failures on restricted mobile browsers or private modes.
+    }
   }, [locale]);
 
   const value = useMemo<LocaleContextValue>(

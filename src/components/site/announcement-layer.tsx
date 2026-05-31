@@ -18,7 +18,14 @@ export function AnnouncementLayer() {
       return;
     }
 
-    const dismissed = window.localStorage.getItem(`announcement:${announcement.id}`);
+    let dismissed: string | null = null;
+
+    try {
+      dismissed = window.localStorage.getItem(`announcement:${announcement.id}`);
+    } catch {
+      dismissed = null;
+    }
+
     const timer = window.setTimeout(() => {
       setExpanded(dismissed !== "dismissed");
     }, 1200);
@@ -31,7 +38,12 @@ export function AnnouncementLayer() {
   }
 
   const dismiss = () => {
-    window.localStorage.setItem(`announcement:${announcement.id}`, "dismissed");
+    try {
+      window.localStorage.setItem(`announcement:${announcement.id}`, "dismissed");
+    } catch {
+      // Ignore storage failures on restricted browsers.
+    }
+
     setExpanded(false);
   };
 

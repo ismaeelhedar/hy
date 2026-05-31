@@ -21,6 +21,13 @@ function ClientExperienceShell({ children }: PropsWithChildren) {
   const { locale } = useLocale();
 
   useEffect(() => {
+    const isTouchLike =
+      window.matchMedia("(pointer: coarse)").matches || window.innerWidth < 1024;
+
+    if (isTouchLike) {
+      return;
+    }
+
     const lenis = new Lenis({
       duration: 1.2,
       smoothWheel: true,
@@ -42,12 +49,25 @@ function ClientExperienceShell({ children }: PropsWithChildren) {
   }, []);
 
   useEffect(() => {
-    const seen = window.sessionStorage.getItem("portfolio-loader-seen");
-    if (seen) {
+    const isTouchLike =
+      window.matchMedia("(pointer: coarse)").matches || window.innerWidth < 768;
+
+    if (isTouchLike) {
       return;
     }
 
-    window.sessionStorage.setItem("portfolio-loader-seen", "true");
+    try {
+      const seen = window.sessionStorage.getItem("portfolio-loader-seen");
+      if (seen) {
+        return;
+      }
+
+      window.sessionStorage.setItem("portfolio-loader-seen", "true");
+    } catch {
+      // If sessionStorage is blocked, skip the loader rather than risking a blank screen.
+      return;
+    }
+
     let tween: gsap.core.Tween | undefined;
     const frame = window.requestAnimationFrame(() => {
       setLoading(true);
