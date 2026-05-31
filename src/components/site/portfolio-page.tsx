@@ -553,37 +553,37 @@ export function PortfolioPage() {
       <SiteNavbar />
 
       <main className="relative z-10">
-        <section className="px-4 pb-20 pt-28 md:px-8 md:pt-32" id="home">
-          <div className="mx-auto grid max-w-7xl gap-10 lg:grid-cols-[0.86fr_1.14fr]">
-            <Reveal className="space-y-8">
-              <div className="space-y-4">
+        <section className="px-4 pb-16 pt-24 sm:pb-20 md:px-8 md:pt-32" id="home">
+          <div className="mx-auto grid max-w-7xl gap-8 lg:grid-cols-[0.86fr_1.14fr] lg:gap-10">
+            <Reveal className="space-y-6 sm:space-y-8">
+              <div className="space-y-4 sm:space-y-5">
                 <Badge className="border-[#96cbb5]/25 bg-[#96cbb5]/8 text-[#dcebe4]">
                   {copy.heroEyebrow}
                 </Badge>
-                <h1 className="max-w-3xl text-5xl font-black leading-[0.96] tracking-[-0.05em] text-white md:text-7xl">
+                <h1 className="max-w-3xl text-[2.85rem] font-black leading-[0.94] tracking-[-0.06em] text-white sm:text-5xl md:text-7xl">
                   {copy.heroTitle}
                 </h1>
-                <p className="max-w-2xl text-base leading-8 text-white/62 md:text-lg">
+                <p className="max-w-2xl text-[0.97rem] leading-7 text-white/62 sm:text-base sm:leading-8 md:text-lg">
                   {copy.heroDescription}
                 </p>
               </div>
 
-              <div className="flex flex-wrap items-center gap-3 text-sm text-white/58">
+              <div className="flex flex-wrap items-center gap-2.5 text-sm text-white/58">
                 <Badge>{copy.heroStatus}</Badge>
                 <Badge>{profile.location}</Badge>
                 <Badge>{profile.responseTime}</Badge>
               </div>
 
-              <div className="flex flex-wrap gap-3">
+              <div className="flex flex-col gap-3 sm:flex-row sm:flex-wrap">
                 <Magnetic>
-                  <Button asChild size="lg">
+                  <Button asChild className="w-full sm:w-auto" size="lg">
                     <a href="#projects">
                       {copy.heroPrimary}
                       <ArrowUpRight className="h-4 w-4" />
                     </a>
                   </Button>
                 </Magnetic>
-                <Button asChild size="lg" variant="secondary">
+                <Button asChild className="w-full sm:w-auto" size="lg" variant="secondary">
                   <a href="#contact">{copy.heroSecondary}</a>
                 </Button>
               </div>
@@ -591,7 +591,7 @@ export function PortfolioPage() {
               <div className="grid gap-3">
                 {copy.heroPillars.map((item) => (
                   <div
-                    className="flex items-start gap-3 rounded-[1.2rem] border border-white/8 bg-white/[0.02] px-4 py-4 text-sm leading-7 text-white/62"
+                    className="flex items-start gap-3 rounded-[1.2rem] border border-white/8 bg-white/[0.02] px-4 py-3.5 text-sm leading-7 text-white/62"
                     key={item}
                   >
                     <span className="mt-2 h-2 w-2 rounded-full bg-[#96cbb5]" />
@@ -619,7 +619,7 @@ export function PortfolioPage() {
               <Reveal>
                 <Card className="overflow-hidden p-0">
                   <div className="grid lg:grid-cols-[0.38fr_0.62fr]">
-                    <div className="relative min-h-[24rem] border-b border-white/8 lg:border-b-0 lg:border-r">
+                    <div className="relative min-h-[18rem] border-b border-white/8 sm:min-h-[22rem] lg:min-h-[24rem] lg:border-b-0 lg:border-r">
                       <Image
                         alt={profile.name}
                         className="h-full w-full object-cover object-[center_18%]"
@@ -629,14 +629,14 @@ export function PortfolioPage() {
                       />
                     </div>
 
-                    <div className="space-y-6 p-6 md:p-8">
+                    <div className="space-y-5 p-5 sm:p-6 md:space-y-6 md:p-8">
                       {copy.storyParagraphs.map((paragraph) => (
                         <p className="text-base leading-8 text-white/64" key={paragraph}>
                           {paragraph}
                         </p>
                       ))}
 
-                      <div className="rounded-[1.5rem] border border-white/8 bg-[#0d1014] p-5">
+                      <div className="rounded-[1.5rem] border border-white/8 bg-[#0d1014] p-4 sm:p-5">
                         <p className="text-sm font-semibold text-white">{copy.whyHireTitle}</p>
                         <div className="mt-4 grid gap-3">
                           {copy.whyHire.map((item) => (
@@ -657,7 +657,7 @@ export function PortfolioPage() {
                   <div className="grid gap-4 sm:grid-cols-2">
                     {metrics.map((metric) => (
                       <Card className="p-5" key={metric.label}>
-                        <p className="text-4xl font-black tracking-[-0.05em] text-white">{metric.value}</p>
+                        <p className="text-3xl font-black tracking-[-0.05em] text-white sm:text-4xl">{metric.value}</p>
                         <p className="mt-3 text-sm font-semibold text-white">{metric.label}</p>
                         <p className="mt-2 text-sm leading-7 text-white/55">{metric.note}</p>
                       </Card>
@@ -666,7 +666,7 @@ export function PortfolioPage() {
                 </Reveal>
 
                 <Reveal delay={0.08}>
-                  <Card className="p-6">
+                  <Card className="p-5 sm:p-6">
                     <div className="flex items-start justify-between gap-4">
                       <div>
                         <p className="text-sm font-semibold text-white">{copy.selectedExperience}</p>
@@ -714,14 +714,14 @@ export function PortfolioPage() {
 
                 return (
                   <Reveal delay={index * 0.04} key={area.title}>
-                    <Card className="h-full p-6 md:p-7">
+                    <Card className="h-full p-5 sm:p-6 md:p-7">
                       <div className="grid gap-6 lg:grid-cols-[0.64fr_0.36fr]">
                         <div>
                           <div className="flex items-center gap-3">
                             <div className="flex h-12 w-12 items-center justify-center rounded-2xl border border-white/8 bg-[#0d1014]">
                               <Icon className="h-5 w-5 text-[#96cbb5]" />
                             </div>
-                            <h3 className="text-2xl font-black tracking-[-0.04em] text-white">
+                            <h3 className="text-xl font-black tracking-[-0.04em] text-white sm:text-2xl">
                               {area.title}
                             </h3>
                           </div>
@@ -765,13 +765,13 @@ export function PortfolioPage() {
             <div className="space-y-6">
               {processSteps.map(([step, title, body], index) => (
                 <Reveal delay={index * 0.03} key={step}>
-                  <div className="grid gap-4 border-t border-white/8 pt-6 md:grid-cols-[5.5rem_1fr]">
+                  <div className="grid gap-3 border-t border-white/8 pt-5 sm:gap-4 sm:pt-6 md:grid-cols-[5.5rem_1fr]">
                     <div className="text-sm font-semibold tracking-[0.18em] text-[#96cbb5]">
                       {step}
                     </div>
                     <div className="grid gap-3 rounded-[1.4rem] border border-white/8 bg-[#111318] p-5">
                       <div className="flex items-center justify-between gap-4">
-                        <h3 className="text-2xl font-black tracking-[-0.04em] text-white">{title}</h3>
+                        <h3 className="text-xl font-black tracking-[-0.04em] text-white sm:text-2xl">{title}</h3>
                         <span className="h-2.5 w-2.5 rounded-full bg-[#96cbb5]" />
                       </div>
                       <p className="max-w-2xl text-sm leading-8 text-white/60">{body}</p>
@@ -821,7 +821,7 @@ export function PortfolioPage() {
 
             <div className="mt-12 grid gap-6 lg:grid-cols-[0.84fr_1.16fr]">
               <Reveal>
-                <Card className="h-full p-6 md:p-7">
+                <Card className="h-full p-5 sm:p-6 md:p-7">
                   <p className="text-sm leading-8 text-white/62">
                     {locale === "ar"
                       ? "أتعامل مع الـ Design System كأداة تشغيل للفريق كله: تسريع القرار، تقليل التكرار، وتحسين الثقة بين التصميم والهندسة. لذلك أركز على اللغة المشتركة قبل الشكل النهائي."
@@ -842,7 +842,7 @@ export function PortfolioPage() {
               </Reveal>
 
               <Reveal delay={0.06}>
-                <Card className="overflow-hidden p-6 md:p-7">
+                <Card className="overflow-hidden p-5 sm:p-6 md:p-7">
                   <div className="grid gap-4 md:grid-cols-2">
                     <div className="rounded-[1.4rem] border border-white/8 bg-[#0d1014] p-5">
                       <p className="text-xs tracking-[0.18em] text-white/38">{copy.designSystemPanels.type}</p>
@@ -882,9 +882,9 @@ export function PortfolioPage() {
 
                     <div className="rounded-[1.4rem] border border-white/8 bg-[#0d1014] p-5">
                       <p className="text-xs tracking-[0.18em] text-white/38">{copy.designSystemPanels.spacing}</p>
-                      <div className="mt-6 flex items-end gap-3">
+                      <div className="mt-6 grid grid-cols-3 items-end gap-3 sm:grid-cols-6">
                         {[4, 8, 12, 16, 24, 32].map((value) => (
-                          <div className="flex flex-1 flex-col items-center gap-3" key={value}>
+                          <div className="flex flex-col items-center gap-3" key={value}>
                             <div
                               className="w-full rounded-xl bg-[#96cbb5]/20"
                               style={{ height: `${Math.max(value, 10)}px` }}
@@ -920,7 +920,7 @@ export function PortfolioPage() {
                     <p className="text-xs tracking-[0.18em] text-white/38">
                       {copy.designSystemPanels.accessibility}
                     </p>
-                    <div className="mt-4 grid gap-3 md:grid-cols-3">
+                    <div className="mt-4 grid gap-3 sm:grid-cols-2 md:grid-cols-3">
                       {[
                         locale === "ar" ? "Contrast ratios واضحة" : "Clear contrast ratios",
                         locale === "ar" ? "Focus states مرئية" : "Visible focus states",
@@ -955,8 +955,13 @@ export function PortfolioPage() {
                   <div className="border-b border-white/8 px-6 py-4 md:px-7">
                     <p className="text-xs tracking-[0.18em] text-white/38">{copy.engineeringPanels.code}</p>
                   </div>
-                  <div className="grid gap-4 p-6 md:p-7">
-                    <pre className="overflow-x-auto rounded-[1.4rem] border border-white/8 bg-[#0d1014] p-5 text-sm leading-7 text-white/70">
+                  <div className="grid gap-4 p-5 sm:p-6 md:p-7">
+                    <div className="rounded-[1.4rem] border border-white/8 bg-[#0d1014] p-4 text-sm leading-7 text-white/62 md:hidden">
+                      {locale === "ar"
+                        ? "هيكلة الواجهة عندي تبدأ من sections واضحة، مكونات قابلة لإعادة الاستخدام، ومنطق responsive لا يُضاف كتصحيح متأخر."
+                        : "My frontend structure starts with clear sections, reusable components, and responsive logic that is planned early rather than patched later."}
+                    </div>
+                    <pre className="hidden overflow-x-auto rounded-[1.4rem] border border-white/8 bg-[#0d1014] p-5 text-sm leading-7 text-white/70 md:block">
 {`type SectionProps = {
   title: string;
   id: string;
@@ -979,7 +984,7 @@ export function ProductSection({
 }`}
                     </pre>
 
-                    <div className="grid gap-3 md:grid-cols-3">
+                    <div className="grid gap-3 sm:grid-cols-3">
                       {["Next.js", "TypeScript", "Responsive systems"].map((item) => (
                         <div
                           className="rounded-[1.2rem] border border-white/8 bg-white/[0.03] px-4 py-3 text-sm text-white/64"
@@ -996,7 +1001,7 @@ export function ProductSection({
               <div className="grid gap-4">
                 {engineeringNotes.map((item, index) => (
                   <Reveal delay={index * 0.04} key={item.title}>
-                    <Card className="p-5">
+                    <Card className="p-4 sm:p-5">
                       <div className="flex items-center gap-3">
                         <div className="flex h-11 w-11 items-center justify-center rounded-2xl border border-white/8 bg-[#0d1014]">
                           <Code2 className="h-5 w-5 text-[#96cbb5]" />
@@ -1027,7 +1032,7 @@ export function ProductSection({
                   delay={index * 0.05}
                   key={`${item.name}-${item.company}`}
                 >
-                  <Card className="h-full p-6 md:p-7">
+                  <Card className="h-full p-5 sm:p-6 md:p-7">
                     <p className="text-3xl font-black leading-[0.9] text-[#96cbb5]">“</p>
                     <p className="mt-4 text-base leading-8 text-white/68 md:text-lg">{item.quote}</p>
                     <div className="mt-8 border-t border-white/8 pt-4">
@@ -1055,7 +1060,7 @@ export function ProductSection({
                     compact
                   />
 
-                  <Card className="p-6">
+                  <Card className="p-5 sm:p-6">
                     <p className="text-sm font-semibold text-white">{copy.contactNotesTitle}</p>
                     <div className="mt-4 grid gap-3">
                       {copy.contactNotes.map((item) => (
@@ -1067,13 +1072,13 @@ export function ProductSection({
                     </div>
                   </Card>
 
-                  <div className="flex flex-wrap gap-3">
-                    <Button asChild size="lg">
+                  <div className="flex flex-col gap-3 sm:flex-row sm:flex-wrap">
+                    <Button asChild className="w-full sm:w-auto" size="lg">
                       <a href={profile.downloadCvHref} rel="noreferrer" target="_blank">
                         {copy.downloadCv}
                       </a>
                     </Button>
-                    <Button asChild size="lg" variant="secondary">
+                    <Button asChild className="w-full sm:w-auto" size="lg" variant="secondary">
                       <a href={profile.socialLinks.find((item) => item.platform === "email")?.href ?? "#contact"}>
                         {copy.heroSecondary}
                       </a>
@@ -1100,9 +1105,9 @@ export function ProductSection({
                 </Reveal>
 
                 <Reveal delay={0.08}>
-                  <Card className="p-6">
+                  <Card className="p-5 sm:p-6">
                     <p className="text-sm font-semibold text-white">{copy.contactChannelsTitle}</p>
-                    <div className="mt-5 grid gap-3 md:grid-cols-3">
+                    <div className="mt-5 grid gap-3 sm:grid-cols-2 md:grid-cols-3">
                       <QuickFact icon={Clock3} label={copy.contactAvailability} />
                       <QuickFact icon={MapPin} label={`${profile.location}`} />
                       <QuickFact icon={CalendarDays} label={copy.contactTimezone} />
@@ -1166,7 +1171,7 @@ function HeroWorkbench({
 
   return (
     <Card className="overflow-hidden p-0">
-      <div className="border-b border-white/8 px-5 py-4 md:px-6">
+      <div className="border-b border-white/8 px-4 py-4 sm:px-5 md:px-6">
         <div className="flex flex-wrap items-center justify-between gap-4">
           <div>
             <p className="text-sm font-semibold text-white">{title}</p>
@@ -1180,8 +1185,8 @@ function HeroWorkbench({
         </div>
       </div>
 
-      <div className="grid gap-4 p-5 md:p-6 lg:grid-cols-[1.06fr_0.94fr]">
-        <div className="space-y-4">
+      <div className="grid gap-3 p-3 sm:gap-4 sm:p-5 md:p-6 lg:grid-cols-[1.06fr_0.94fr]">
+        <div className="space-y-3 sm:space-y-4">
           <div className="overflow-hidden rounded-[1.5rem] border border-white/8 bg-[#0d1014]">
             <div className="flex items-center justify-between border-b border-white/8 px-4 py-3 text-xs text-white/42">
               <span>{locale === "ar" ? "مراجعة واجهة المنتج" : "Product interface review"}</span>
@@ -1189,7 +1194,7 @@ function HeroWorkbench({
             </div>
             <Image
               alt="Product preview"
-              className="aspect-[16/10] w-full object-cover"
+              className="aspect-[4/3] w-full object-cover sm:aspect-[16/10]"
               height={900}
               priority
               src="/projects/aurora-finance.svg"
@@ -1197,7 +1202,26 @@ function HeroWorkbench({
             />
           </div>
 
-          <div className="grid gap-4 md:grid-cols-[0.92fr_1.08fr]">
+          <div className="rounded-[1.5rem] border border-white/8 bg-[#0d1014] p-4 md:hidden">
+            <p className="text-xs tracking-[0.18em] text-white/38">
+              {locale === "ar" ? "ملخص التنفيذ" : "Execution summary"}
+            </p>
+            <div className="mt-4 grid gap-3">
+              {decisionLog.slice(0, 2).map(([label, value]) => (
+                <div className="border-b border-white/6 pb-3 last:border-b-0 last:pb-0" key={label}>
+                  <p className="text-sm font-semibold text-white">{label}</p>
+                  <p className="mt-1 text-sm leading-7 text-white/56">{value}</p>
+                </div>
+              ))}
+            </div>
+            <div className="mt-4 flex flex-wrap gap-2">
+              {tokenItems.map((item) => (
+                <Badge key={item}>{item}</Badge>
+              ))}
+            </div>
+          </div>
+
+          <div className="hidden gap-4 md:grid md:grid-cols-[0.92fr_1.08fr]">
             <div className="rounded-[1.5rem] border border-white/8 bg-[#0d1014] p-5">
               <p className="text-xs tracking-[0.18em] text-white/38">
                 {locale === "ar" ? "سجل القرار" : "Decision log"}
@@ -1227,8 +1251,8 @@ function HeroWorkbench({
           </div>
         </div>
 
-        <div className="space-y-4">
-          <div className="rounded-[1.5rem] border border-white/8 bg-[#0d1014] p-5">
+        <div className="space-y-3 sm:space-y-4">
+          <div className="rounded-[1.5rem] border border-white/8 bg-[#0d1014] p-4 sm:p-5">
             <p className="text-xs tracking-[0.18em] text-white/38">
               {locale === "ar" ? "مراجعة النظام" : "System review"}
             </p>
@@ -1253,7 +1277,7 @@ function HeroWorkbench({
             </div>
           </div>
 
-          <div className="overflow-hidden rounded-[1.5rem] border border-white/8 bg-[#0d1014]">
+          <div className="hidden overflow-hidden rounded-[1.5rem] border border-white/8 bg-[#0d1014] sm:block">
             <div className="flex items-center justify-between border-b border-white/8 px-4 py-3 text-xs text-white/42">
               <span>{locale === "ar" ? "عرض موبايل" : "Mobile surface"}</span>
               <span>{locale === "ar" ? "Product preview" : "Product preview"}</span>
@@ -1289,7 +1313,9 @@ function SectionIntro({
       <h2
         className={cn(
           "mt-4 max-w-4xl font-black tracking-[-0.05em] text-white",
-          compact ? "text-4xl md:text-5xl" : "text-4xl md:text-6xl",
+          compact
+            ? "text-[2rem] leading-[1.04] sm:text-4xl md:text-5xl"
+            : "text-[2.15rem] leading-[1.02] sm:text-4xl md:text-6xl",
         )}
       >
         {title}
@@ -1327,7 +1353,7 @@ function ProjectNarrative({
   const reversed = index % 2 === 1;
 
   return (
-    <article className="border-t border-white/8 pt-14 first:border-t-0 first:pt-0">
+    <article className="border-t border-white/8 pt-10 first:border-t-0 first:pt-0 sm:pt-14">
       <div className="grid gap-8 lg:grid-cols-[0.88fr_1.12fr]">
         <div className={cn(reversed ? "lg:order-2" : "")}>
           <div className="space-y-5 lg:sticky lg:top-28">
@@ -1336,12 +1362,14 @@ function ProjectNarrative({
               <Badge>{project.year}</Badge>
             </div>
 
-            <h3 className="max-w-2xl text-4xl font-black tracking-[-0.05em] text-white md:text-5xl">
+            <h3 className="max-w-2xl text-[2rem] font-black tracking-[-0.05em] text-white sm:text-4xl md:text-5xl">
               {project.title}
             </h3>
-            <p className="max-w-2xl text-base leading-8 text-white/60">{project.story}</p>
+            <p className="max-w-2xl text-sm leading-7 text-white/60 sm:text-base sm:leading-8">
+              {project.story}
+            </p>
 
-            <div className="rounded-[1.5rem] border border-white/8 bg-[#111318] p-5">
+            <div className="rounded-[1.5rem] border border-white/8 bg-[#111318] p-4 sm:p-5">
               <p className="text-xs tracking-[0.18em] text-white/38">{roleLabel}</p>
               <p className="mt-3 text-lg font-semibold text-white">{project.role}</p>
               <div className="mt-5 grid gap-3 sm:grid-cols-3">
@@ -1357,14 +1385,14 @@ function ProjectNarrative({
               </div>
             </div>
 
-            <div className="flex flex-wrap gap-3">
-              <Button asChild>
+            <div className="flex flex-col gap-3 sm:flex-row sm:flex-wrap">
+              <Button asChild className="w-full sm:w-auto">
                 <a href={project.links.live}>
                   {liveLabel}
                   <ArrowUpRight className="h-4 w-4" />
                 </a>
               </Button>
-              <Button asChild variant="secondary">
+              <Button asChild className="w-full sm:w-auto" variant="secondary">
                 <Link href={project.links.caseStudy}>{caseStudyLabel}</Link>
               </Button>
             </div>
@@ -1375,7 +1403,7 @@ function ProjectNarrative({
           <Card className="overflow-hidden p-0">
             <Image
               alt={project.title}
-              className="aspect-[16/10] w-full object-cover"
+              className="aspect-[4/3] w-full object-cover sm:aspect-[16/10]"
               height={900}
               src={`/projects/${project.slug}.svg`}
               width={1440}
@@ -1433,7 +1461,7 @@ function NarrativePanel({
   children: React.ReactNode;
 }) {
   return (
-    <Card className="p-5">
+    <Card className="p-4 sm:p-5">
       <p className="text-xs tracking-[0.18em] text-white/38">{title}</p>
       <div className="mt-4">{children}</div>
     </Card>
@@ -1469,7 +1497,7 @@ function ContactCard({
     item.href.startsWith("http") || item.href.startsWith("mailto:") ? openLabel : contactContextLabel;
 
   return (
-    <Card className="p-5">
+    <Card className="p-4 sm:p-5">
       <div className="flex items-start justify-between gap-4">
         <div
           className="flex h-12 w-12 items-center justify-center rounded-2xl border border-white/8"
@@ -1492,7 +1520,7 @@ function ContactCard({
         <p className="mt-3 text-sm leading-7 text-white/58">{item.preview}</p>
       </div>
 
-      <div className="mt-5 flex items-center justify-between">
+      <div className="mt-5 flex flex-wrap items-center justify-between gap-3">
         <a
           className="inline-flex items-center gap-2 text-sm text-white/68 transition hover:text-white"
           href={item.href}

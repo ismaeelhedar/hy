@@ -113,9 +113,9 @@ export function SiteNavbar() {
 
   return (
     <>
-      <motion.header className="fixed inset-x-0 top-0 z-50 px-4 pt-4 md:px-8" style={{ opacity }}>
+      <motion.header className="fixed inset-x-0 top-0 z-50 px-3 pt-3 md:px-8 md:pt-4" style={{ opacity }}>
         <motion.div
-          className="mx-auto flex max-w-7xl items-center justify-between rounded-[1.35rem] border px-4 py-3 shadow-[0_16px_40px_rgba(0,0,0,0.18)] md:px-5"
+          className="mx-auto flex max-w-7xl items-center justify-between rounded-[1.2rem] border px-3 py-2.5 shadow-[0_16px_40px_rgba(0,0,0,0.18)] sm:px-4 sm:py-3 md:rounded-[1.35rem] md:px-5"
           style={{
             backdropFilter,
             backgroundColor: background,
@@ -123,7 +123,7 @@ export function SiteNavbar() {
           }}
         >
           <a className="group flex items-center gap-3" href="#home">
-            <span className="flex h-10 w-10 items-center justify-center rounded-2xl border border-white/10 bg-white/[0.04] text-sm font-black text-white">
+            <span className="flex h-9 w-9 items-center justify-center rounded-2xl border border-white/10 bg-white/[0.04] text-sm font-black text-white sm:h-10 sm:w-10">
               IH
             </span>
             <div className="hidden sm:block">
@@ -168,7 +168,7 @@ export function SiteNavbar() {
 
             <button
               aria-label="Open navigation"
-              className="inline-flex h-11 w-11 items-center justify-center rounded-xl border border-white/10 bg-white/[0.04] text-white xl:hidden"
+              className="inline-flex h-10 w-10 items-center justify-center rounded-xl border border-white/10 bg-white/[0.04] text-white xl:hidden"
               onClick={() => setOpen(true)}
               type="button"
             >
@@ -188,7 +188,7 @@ export function SiteNavbar() {
           >
             <motion.div
               animate={{ y: 0, opacity: 1 }}
-              className="flex h-full flex-col p-6"
+              className="flex h-full flex-col p-5 sm:p-6"
               exit={{ y: 24, opacity: 0 }}
               initial={{ y: 24, opacity: 0 }}
               transition={{ duration: 0.28 }}
@@ -208,10 +208,10 @@ export function SiteNavbar() {
                 </button>
               </div>
 
-              <div className="mt-12 flex flex-1 flex-col gap-3">
+              <div className="mt-10 flex flex-1 flex-col gap-3 sm:mt-12">
                 {navLinks.map((item) => (
                   <a
-                    className="rounded-[1.25rem] border border-white/8 bg-[#111318] px-5 py-4 text-lg font-semibold text-white/82"
+                    className="rounded-[1.25rem] border border-white/8 bg-[#111318] px-5 py-4 text-base font-semibold text-white/82 sm:text-lg"
                     href={item.href}
                     key={item.id}
                     onClick={() => setOpen(false)}
