@@ -97,7 +97,7 @@ export interface SkillCategory {
 
 export interface ProjectLinkSet {
   live: string;
-  caseStudy: string;
+  caseStudy?: string;
 }
 
 export interface ProjectMetric {
@@ -113,20 +113,37 @@ export interface ProjectProcess {
   frontend: string[];
 }
 
-export interface ProjectItem {
+export type ProjectPlatformType = "web" | "mobile";
+
+export interface ProjectArchiveItem {
   slug: string;
   title: string;
+  client: string;
   category: string;
+  sector: string;
+  platformType: ProjectPlatformType;
+  platformLabel: string;
   role: string;
   year: string;
   summary: string;
-  story: string;
+  contribution: string;
+  focus: string[];
+  designStates: string[];
   accent: string;
+  links: ProjectLinkSet;
+  featured?: boolean;
+}
+
+export interface ProjectItem extends ProjectArchiveItem {
+  summary: string;
+  story: string;
+  goals: string[];
   stack: string[];
   metrics: ProjectMetric[];
   links: ProjectLinkSet;
   challenge: string;
   solution: string;
   results: string[];
+  responsibilities: string[];
   process: ProjectProcess;
 }

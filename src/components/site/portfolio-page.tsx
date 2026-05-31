@@ -25,18 +25,19 @@ import {
 } from "lucide-react";
 import { getExperience } from "@content/experience";
 import { getProfile } from "@content/profile";
-import { getProjects } from "@content/projects";
+import { getProjectArchive, getProjects } from "@content/projects";
 import { getTestimonials } from "@content/testimonials";
 import { AnnouncementLayer } from "@/components/site/announcement-layer";
 import { Magnetic } from "@/components/site/magnetic";
 import { useLocale } from "@/components/site/locale-provider";
+import { ProjectVisual } from "@/components/site/project-visual";
 import { Reveal } from "@/components/site/reveal";
 import { SiteNavbar } from "@/components/site/site-navbar";
 import { Badge } from "@/components/ui/badge";
 import { Button } from "@/components/ui/button";
 import { Card } from "@/components/ui/card";
 import { cn } from "@/lib/utils";
-import type { ProjectItem, SocialLink } from "@/types/site";
+import type { ProjectArchiveItem, ProjectItem, SocialLink } from "@/types/site";
 
 const socialIcons = {
   email: Mail,
@@ -56,6 +57,7 @@ export function PortfolioPage() {
   const profile = useMemo(() => getProfile(locale), [locale]);
   const experience = useMemo(() => getExperience(locale), [locale]);
   const projects = useMemo(() => getProjects(locale), [locale]);
+  const projectArchive = useMemo(() => getProjectArchive(locale), [locale]);
   const testimonials = useMemo(() => getTestimonials(locale), [locale]);
   const [copiedItem, setCopiedItem] = useState<string | null>(null);
 
@@ -104,16 +106,27 @@ export function PortfolioPage() {
             processDescription:
               "أفضّل عملية هادئة ومقصودة، بحيث يكون لكل مرحلة مخرجات مفهومة للفريق كله.",
             projectsEyebrow: "مشاريع مميزة",
-            projectsTitle: "المشاريع تُعرض هنا كقصص منتج مصغرة، لا كبطاقات معرض.",
+            projectsTitle: "هذه المشاريع تُعرض كقصص منتج حقيقية توضّح كيف أفكر، ماذا نظّمت، وأين كان أثر التصميم والتنفيذ.",
             projectsDescription:
-              "كل مشروع يوضّح المشكلة، الهدف، قرارات التصميم، أثر التنفيذ، والنتيجة النهائية.",
+              "اخترت هنا المشاريع التي تعبّر عن نوع العمل الذي أقدمه فعليًا: هيكلة أوضح، حالات أكثر نضجًا، وتجربة يمكن ترجمتها بوعي إلى Frontend أو Mobile product.",
             challenge: "التحدي",
             goals: "الأهداف",
             outcome: "النتيجة",
             role: "الدور",
+            contribution: "المساهمة",
+            responsibilities: "ما تولّيته",
+            designStates: "حالات التصميم",
+            focusAreas: "محاور التركيز",
             results: "النتائج",
             livePreview: "معاينة مباشرة",
             caseStudy: "تفاصيل المشروع",
+            projectDirectoryEyebrow: "المكتبة الكاملة",
+            projectDirectoryTitle: "كل المشاريع موزّعة هنا بين web وmobile بشكل يوضح نوع المنتج، مساهمتي، والحالات التي ركزت عليها.",
+            projectDirectoryDescription:
+              "بدل رصّ الروابط فقط، هذا القسم ينظّم الأعمال بطريقة أقرب لدفتر مشاريع حقيقي يشرح أين كان تركيز الـ UX وما الحالات التي احتاجت عناية خاصة.",
+            webPlatforms: "منصات وتجارب ويب",
+            mobileApplications: "تطبيقات الموبايل",
+            featuredTag: "دراسة حالة مميزة",
             systemsEyebrow: "خبرة الأنظمة",
             systemsTitle: "الـ Design System بالنسبة لي ليس مكتبة مكونات فقط، بل لغة تشغيل كاملة للمنتج.",
             systemsDescription:
@@ -205,16 +218,29 @@ export function PortfolioPage() {
             processDescription:
               "I prefer a calm and structured workflow where every phase produces something useful for the wider team.",
             projectsEyebrow: "Featured work",
-            projectsTitle: "Projects are presented here as compact product stories, not gallery cards.",
+            projectsTitle:
+              "These projects are presented as real product stories that show how I structure, simplify, and ship digital experiences.",
             projectsDescription:
-              "Each one covers the problem, the goals, the key design decisions, the implementation layer, and the resulting impact.",
+              "I selected the work that best reflects the way I think in practice: clearer systems, stronger interface states, and design decisions that stay grounded in delivery.",
             challenge: "Challenge",
             goals: "Goals",
             outcome: "Outcome",
             role: "Role",
+            contribution: "Contribution",
+            responsibilities: "What I owned",
+            designStates: "Design states",
+            focusAreas: "Focus areas",
             results: "Results",
             livePreview: "Live preview",
             caseStudy: "Project details",
+            projectDirectoryEyebrow: "Full portfolio directory",
+            projectDirectoryTitle:
+              "The full project library is organized here across web and mobile with clearer context, contribution notes, and the key states I worked through.",
+            projectDirectoryDescription:
+              "Instead of dropping raw links, this section turns the portfolio into a structured project ledger that shows the product type, my role, and the UX states that mattered.",
+            webPlatforms: "Web platforms",
+            mobileApplications: "Mobile applications",
+            featuredTag: "Featured case story",
             systemsEyebrow: "System thinking",
             systemsTitle:
               "For me, a design system is not just a component library. It is the operating language of the product.",
@@ -416,58 +442,6 @@ export function PortfolioPage() {
     [locale],
   );
 
-  const projectNarratives = useMemo(
-    () =>
-      locale === "ar"
-        ? {
-            "aurora-finance": {
-              goals: [
-                "تهدئة كثافة المعلومات دون إضعاف الوظائف",
-                "تقليل الوقت للوصول إلى الإجراء الأساسي",
-                "رفع الثقة البصرية في المنتج المالي",
-              ],
-            },
-            "nexboard-studio": {
-              goals: [
-                "جعل التعاون يشعر بالحياة لا بالميكانيكية",
-                "تقليل الاحتكاك في بناء اللوحات والتنقل بينها",
-                "ربط الـ canvas والـ panels ضمن نظام حركة واحد",
-              ],
-            },
-            "souk-mobile": {
-              goals: [
-                "تحسين الاكتشاف والبحث على الشاشات الصغيرة",
-                "تقليل التردد أثناء الـ checkout",
-                "بناء لغة موبايل قابلة لإعادة الاستخدام",
-              ],
-            },
-          }
-        : {
-            "aurora-finance": {
-              goals: [
-                "Calm dense financial information without weakening functionality",
-                "Shorten the time to the primary action",
-                "Increase product trust for operations teams",
-              ],
-            },
-            "nexboard-studio": {
-              goals: [
-                "Make collaboration feel alive rather than mechanical",
-                "Reduce friction while creating and navigating boards",
-                "Connect canvas, panels, and feedback in one motion language",
-              ],
-            },
-            "souk-mobile": {
-              goals: [
-                "Improve discovery and browsing on smaller screens",
-                "Reduce hesitation during checkout",
-                "Create a reusable mobile commerce language",
-              ],
-            },
-          },
-    [locale],
-  );
-
   const systemNotes = useMemo(
     () =>
       locale === "ar"
@@ -534,6 +508,16 @@ export function PortfolioPage() {
         ),
       ),
     [profile.socialLinks],
+  );
+
+  const webProjects = useMemo(
+    () => projectArchive.filter((item) => item.platformType === "web"),
+    [projectArchive],
+  );
+
+  const mobileProjects = useMemo(
+    () => projectArchive.filter((item) => item.platformType === "mobile"),
+    [projectArchive],
   );
 
   const copyText = async (value: string, label: string) => {
@@ -796,17 +780,50 @@ export function PortfolioPage() {
                 <ProjectNarrative
                   challengeLabel={copy.challenge}
                   caseStudyLabel={copy.caseStudy}
-                  goals={projectNarratives[project.slug as keyof typeof projectNarratives]?.goals ?? []}
+                  contributionLabel={copy.contribution}
+                  designStatesLabel={copy.designStates}
                   goalsLabel={copy.goals}
                   index={index}
                   key={project.slug}
                   liveLabel={copy.livePreview}
                   outcomeLabel={copy.outcome}
                   project={project}
+                  responsibilitiesLabel={copy.responsibilities}
                   resultsLabel={copy.results}
                   roleLabel={copy.role}
                 />
               ))}
+            </div>
+
+            <div className="mt-20 border-t border-white/8 pt-14">
+              <SectionIntro
+                eyebrow={copy.projectDirectoryEyebrow}
+                title={copy.projectDirectoryTitle}
+                description={copy.projectDirectoryDescription}
+              />
+
+              <div className="mt-12 space-y-12">
+                <ProjectDirectoryGroup
+                  caseStudyLabel={copy.caseStudy}
+                  contributionLabel={copy.contribution}
+                  designStatesLabel={copy.designStates}
+                  featuredTag={copy.featuredTag}
+                  focusLabel={copy.focusAreas}
+                  items={webProjects}
+                  liveLabel={copy.livePreview}
+                  title={copy.webPlatforms}
+                />
+                <ProjectDirectoryGroup
+                  caseStudyLabel={copy.caseStudy}
+                  contributionLabel={copy.contribution}
+                  designStatesLabel={copy.designStates}
+                  featuredTag={copy.featuredTag}
+                  focusLabel={copy.focusAreas}
+                  items={mobileProjects}
+                  liveLabel={copy.livePreview}
+                  title={copy.mobileApplications}
+                />
+              </div>
             </div>
           </div>
         </section>
@@ -1337,7 +1354,9 @@ function ProjectNarrative({
   resultsLabel,
   liveLabel,
   caseStudyLabel,
-  goals,
+  contributionLabel,
+  designStatesLabel,
+  responsibilitiesLabel,
 }: {
   project: ProjectItem;
   index: number;
@@ -1348,7 +1367,9 @@ function ProjectNarrative({
   resultsLabel: string;
   liveLabel: string;
   caseStudyLabel: string;
-  goals: string[];
+  contributionLabel: string;
+  designStatesLabel: string;
+  responsibilitiesLabel: string;
 }) {
   const reversed = index % 2 === 1;
 
@@ -1387,53 +1408,79 @@ function ProjectNarrative({
 
             <div className="flex flex-col gap-3 sm:flex-row sm:flex-wrap">
               <Button asChild className="w-full sm:w-auto">
-                <a href={project.links.live}>
+                <a href={project.links.live} rel="noreferrer" target="_blank">
                   {liveLabel}
                   <ArrowUpRight className="h-4 w-4" />
                 </a>
               </Button>
-              <Button asChild className="w-full sm:w-auto" variant="secondary">
-                <Link href={project.links.caseStudy}>{caseStudyLabel}</Link>
-              </Button>
+              {project.links.caseStudy ? (
+                <Button asChild className="w-full sm:w-auto" variant="secondary">
+                  <Link href={project.links.caseStudy}>{caseStudyLabel}</Link>
+                </Button>
+              ) : null}
             </div>
           </div>
         </div>
 
         <div className={cn("space-y-4", reversed ? "lg:order-1" : "")}>
-          <Card className="overflow-hidden p-0">
-            <Image
-              alt={project.title}
-              className="aspect-[4/3] w-full object-cover sm:aspect-[16/10]"
-              height={900}
-              src={`/projects/${project.slug}.svg`}
-              width={1440}
-            />
-          </Card>
+          <ProjectVisual project={project} />
 
           <div className="grid gap-4 md:grid-cols-2">
             <NarrativePanel title={challengeLabel}>{project.challenge}</NarrativePanel>
             <NarrativePanel title={goalsLabel}>
               <ul className="grid gap-3">
-                {goals.map((goal) => (
+                {project.goals.map((goal) => (
                   <li
                     className="rounded-[1rem] border border-white/8 bg-[#0d1014] px-4 py-3 text-sm leading-7 text-white/60"
                     key={goal}
                   >
                     {goal}
                   </li>
+              ))}
+            </ul>
+          </NarrativePanel>
+          </div>
+
+          <div className="grid gap-4 md:grid-cols-2">
+            <NarrativePanel title={outcomeLabel}>
+              <p className="text-sm leading-8 text-white/62">{project.solution}</p>
+              <div className="mt-5 flex flex-wrap gap-2">
+                {project.stack.map((item) => (
+                  <Badge key={item}>{item}</Badge>
                 ))}
-              </ul>
+              </div>
+            </NarrativePanel>
+            <NarrativePanel title={contributionLabel}>
+              <p className="text-sm leading-8 text-white/62">{project.contribution}</p>
             </NarrativePanel>
           </div>
 
-          <NarrativePanel title={outcomeLabel}>
-            <p className="text-sm leading-8 text-white/62">{project.solution}</p>
-            <div className="mt-5 flex flex-wrap gap-2">
-              {project.stack.map((item) => (
-                <Badge key={item}>{item}</Badge>
-              ))}
-            </div>
-          </NarrativePanel>
+          <div className="grid gap-4 md:grid-cols-2">
+            <NarrativePanel title={designStatesLabel}>
+              <div className="grid gap-3">
+                {project.designStates.map((item) => (
+                  <div
+                    className="rounded-[1rem] border border-white/8 bg-[#0d1014] px-4 py-3 text-sm leading-7 text-white/60"
+                    key={item}
+                  >
+                    {item}
+                  </div>
+                ))}
+              </div>
+            </NarrativePanel>
+            <NarrativePanel title={responsibilitiesLabel}>
+              <div className="grid gap-3">
+                {project.responsibilities.map((item) => (
+                  <div
+                    className="rounded-[1rem] border border-white/8 bg-[#0d1014] px-4 py-3 text-sm leading-7 text-white/60"
+                    key={item}
+                  >
+                    {item}
+                  </div>
+                ))}
+              </div>
+            </NarrativePanel>
+          </div>
 
           <NarrativePanel title={resultsLabel}>
             <div className="grid gap-3 md:grid-cols-3">
@@ -1464,6 +1511,135 @@ function NarrativePanel({
     <Card className="p-4 sm:p-5">
       <p className="text-xs tracking-[0.18em] text-white/38">{title}</p>
       <div className="mt-4">{children}</div>
+    </Card>
+  );
+}
+
+function ProjectDirectoryGroup({
+  title,
+  items,
+  liveLabel,
+  caseStudyLabel,
+  contributionLabel,
+  featuredTag,
+  focusLabel,
+  designStatesLabel,
+}: {
+  title: string;
+  items: ProjectArchiveItem[];
+  liveLabel: string;
+  caseStudyLabel: string;
+  contributionLabel: string;
+  featuredTag: string;
+  focusLabel: string;
+  designStatesLabel: string;
+}) {
+  return (
+    <div className="space-y-6">
+      <div className="flex flex-wrap items-center justify-between gap-3 border-b border-white/8 pb-4">
+        <h3 className="text-2xl font-black tracking-[-0.04em] text-white sm:text-3xl">{title}</h3>
+        <Badge>{items.length}</Badge>
+      </div>
+
+      <div className="grid gap-5 xl:grid-cols-2">
+        {items.map((item, index) => (
+          <Reveal delay={index * 0.02} key={item.slug}>
+            <ProjectDirectoryCard
+              caseStudyLabel={caseStudyLabel}
+              contributionLabel={contributionLabel}
+              designStatesLabel={designStatesLabel}
+              featuredTag={featuredTag}
+              focusLabel={focusLabel}
+              item={item}
+              liveLabel={liveLabel}
+            />
+          </Reveal>
+        ))}
+      </div>
+    </div>
+  );
+}
+
+function ProjectDirectoryCard({
+  item,
+  liveLabel,
+  caseStudyLabel,
+  contributionLabel,
+  featuredTag,
+  focusLabel,
+  designStatesLabel,
+}: {
+  item: ProjectArchiveItem;
+  liveLabel: string;
+  caseStudyLabel: string;
+  contributionLabel: string;
+  featuredTag: string;
+  focusLabel: string;
+  designStatesLabel: string;
+}) {
+  return (
+    <Card className="h-full p-4 sm:p-5">
+      <div className="space-y-5">
+        <div className="flex flex-wrap items-center gap-2">
+          <Badge>{item.category}</Badge>
+          <Badge>{item.platformLabel}</Badge>
+          <Badge>{item.year}</Badge>
+          {item.featured ? <Badge>{featuredTag}</Badge> : null}
+        </div>
+
+        <ProjectVisual compact project={item} />
+
+        <div>
+          <h4 className="text-xl font-black tracking-[-0.04em] text-white sm:text-2xl">{item.title}</h4>
+          <p className="mt-3 text-sm leading-7 text-white/60">{item.summary}</p>
+        </div>
+
+        <div className="rounded-[1.3rem] border border-white/8 bg-[#0d1014] p-4">
+          <p className="text-xs tracking-[0.18em] text-white/38">{contributionLabel}</p>
+          <p className="mt-3 text-sm leading-7 text-white/60">{item.contribution}</p>
+        </div>
+
+        <div className="grid gap-3 sm:grid-cols-2">
+          <div className="rounded-[1.2rem] border border-white/8 bg-[#0d1014] p-4">
+            <p className="text-xs tracking-[0.18em] text-white/38">{focusLabel}</p>
+            <div className="mt-3 flex flex-wrap gap-2">
+              {item.focus.map((point) => (
+                <span
+                  className="rounded-full border border-white/8 bg-white/[0.03] px-3 py-1.5 text-xs text-white/62"
+                  key={point}
+                >
+                  {point}
+                </span>
+              ))}
+            </div>
+          </div>
+
+          <div className="rounded-[1.2rem] border border-white/8 bg-[#0d1014] p-4">
+            <p className="text-xs tracking-[0.18em] text-white/38">{designStatesLabel}</p>
+            <div className="mt-3 grid gap-2">
+              {item.designStates.slice(0, 3).map((point) => (
+                <div className="text-sm leading-6 text-white/60" key={point}>
+                  {point}
+                </div>
+              ))}
+            </div>
+          </div>
+        </div>
+
+        <div className="flex flex-col gap-3 sm:flex-row sm:flex-wrap">
+          <Button asChild className="w-full sm:w-auto">
+            <a href={item.links.live} rel="noreferrer" target="_blank">
+              {liveLabel}
+              <ArrowUpRight className="h-4 w-4" />
+            </a>
+          </Button>
+          {item.links.caseStudy ? (
+            <Button asChild className="w-full sm:w-auto" variant="secondary">
+              <Link href={item.links.caseStudy}>{caseStudyLabel}</Link>
+            </Button>
+          ) : null}
+        </div>
+      </div>
     </Card>
   );
 }

@@ -1,6 +1,5 @@
 "use client";
 
-import Image from "next/image";
 import Link from "next/link";
 import {
   ArrowLeft,
@@ -13,6 +12,7 @@ import {
 } from "lucide-react";
 import { getProjectBySlug } from "@content/projects";
 import { useLocale } from "@/components/site/locale-provider";
+import { ProjectVisual } from "@/components/site/project-visual";
 import { Reveal } from "@/components/site/reveal";
 import { Badge } from "@/components/ui/badge";
 import { Button } from "@/components/ui/button";
@@ -34,6 +34,9 @@ export function ProjectCaseStudy({ slug }: { slug: string }) {
           story: "القصة",
           role: "الدور",
           stack: "التقنيات",
+          contribution: "المساهمة",
+          responsibilities: "ما تولّيته",
+          states: "حالات التصميم",
           challenge: "التحدي",
           solution: "الاستجابة التصميمية",
           results: "النتائج",
@@ -49,6 +52,9 @@ export function ProjectCaseStudy({ slug }: { slug: string }) {
           story: "Story",
           role: "Role",
           stack: "Stack",
+          contribution: "Contribution",
+          responsibilities: "What I owned",
+          states: "Design states",
           challenge: "Challenge",
           solution: "Design response",
           results: "Results",
@@ -91,7 +97,7 @@ export function ProjectCaseStudy({ slug }: { slug: string }) {
 
               <div className="flex flex-col gap-3 sm:flex-row sm:flex-wrap">
                 <Button asChild className="w-full sm:w-auto">
-                  <a href={project.links.live}>
+                  <a href={project.links.live} rel="noreferrer" target="_blank">
                     {copy.live}
                     <ArrowUpRight className="h-4 w-4" />
                   </a>
@@ -102,16 +108,7 @@ export function ProjectCaseStudy({ slug }: { slug: string }) {
               </div>
             </div>
 
-            <Card className="overflow-hidden p-0">
-              <Image
-                alt={project.title}
-                className="aspect-[4/3] w-full object-cover sm:aspect-[16/10]"
-                height={900}
-                priority
-                src={`/projects/${slug}.svg`}
-                width={1440}
-              />
-            </Card>
+            <ProjectVisual project={project} />
           </div>
         </Reveal>
 
@@ -133,15 +130,19 @@ export function ProjectCaseStudy({ slug }: { slug: string }) {
                     ))}
                   </div>
                 </div>
+                <div className="rounded-[1.2rem] border border-white/8 bg-[#0d1014] px-4 py-4">
+                  <p className="text-xs tracking-[0.16em] text-white/38">{copy.contribution}</p>
+                  <p className="mt-2 text-sm leading-7 text-white/60">{project.contribution}</p>
+                </div>
               </div>
             </Card>
 
             <div className="grid gap-4 md:grid-cols-3">
               {project.metrics.map((metric) => (
-              <Card className="p-5" key={metric.label}>
-                <p className="text-3xl font-black tracking-[-0.05em] text-white sm:text-4xl">{metric.value}</p>
-                <p className="mt-3 text-sm text-white/48">{metric.label}</p>
-              </Card>
+                <Card className="p-5" key={metric.label}>
+                  <p className="text-3xl font-black tracking-[-0.05em] text-white sm:text-4xl">{metric.value}</p>
+                  <p className="mt-3 text-sm text-white/48">{metric.label}</p>
+                </Card>
               ))}
             </div>
           </div>
@@ -172,6 +173,38 @@ export function ProjectCaseStudy({ slug }: { slug: string }) {
             </Card>
           </Reveal>
         </div>
+
+        <Reveal>
+          <div className="grid gap-4 lg:grid-cols-2">
+            <Card className="p-5 sm:p-6">
+              <p className="text-xs tracking-[0.18em] text-[#96cbb5]">{copy.states}</p>
+              <div className="mt-4 grid gap-3">
+                {project.designStates.map((item) => (
+                  <div
+                    className="rounded-[1rem] border border-white/8 bg-[#0d1014] px-4 py-3 text-sm leading-7 text-white/60"
+                    key={item}
+                  >
+                    {item}
+                  </div>
+                ))}
+              </div>
+            </Card>
+
+            <Card className="p-5 sm:p-6">
+              <p className="text-xs tracking-[0.18em] text-[#96cbb5]">{copy.responsibilities}</p>
+              <div className="mt-4 grid gap-3">
+                {project.responsibilities.map((item) => (
+                  <div
+                    className="rounded-[1rem] border border-white/8 bg-[#0d1014] px-4 py-3 text-sm leading-7 text-white/60"
+                    key={item}
+                  >
+                    {item}
+                  </div>
+                ))}
+              </div>
+            </Card>
+          </div>
+        </Reveal>
 
         <Reveal>
           <Card className="p-5 sm:p-6" id="results">
